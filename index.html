@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="googlebot" content="noindex,nofollow,noarchive">
+<meta name="bingbot" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer"><title>直流燃油输送泵｜产品、市场与用户分析</title>
+<style>body{margin:0;background:#f5f4f1;color:#202923;font:16px/1.7 system-ui,sans-serif}main{max-width:600px;margin:16vh auto;padding:28px}h1{font-size:24px}p{color:#526057}button{padding:8px 20px;border:0;border-radius:7px;background:#28604d;color:white;font:inherit;cursor:pointer}</style></head>
+<body><main><h1>直流燃油输送泵</h1><p id="status" role="status">正在加载 v06 报告，请稍候…</p><button id="retry" hidden>重新加载</button></main>
+<script>
+(async()=>{
+try{
+ if(!('DecompressionStream' in window))throw new Error('请使用较新版本的 Chrome、Edge 或 Safari 打开。');
+ const response=await fetch('report.html.gz',{cache:'no-cache'});
+ if(!response.ok)throw new Error('报告加载失败，请稍后重试。');
+ const bytes=await response.arrayBuffer();
+ const digest=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),v=>v.toString(16).padStart(2,'0')).join('');
+ if(digest!=='bb1150c69030224963abcb5ac5cde08d36d4bb5f7f3551002cf65d8dad06d6b9')throw new Error('报告文件校验未通过，请刷新后重试。');
+ const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+ const html=await new Response(stream).text();
+ document.open();document.write(html);document.close();
+}catch(e){document.getElementById('status').textContent=e.message||'加载失败，请稍后重试。';const retry=document.getElementById('retry');retry.hidden=false;retry.onclick=()=>location.reload();}
+})();
+</script></body></html>
