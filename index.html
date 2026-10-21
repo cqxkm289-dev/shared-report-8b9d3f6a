@@ -10,11 +10,11 @@
 (async()=>{
 try{
  if(!('DecompressionStream' in window))throw new Error('请使用较新版本的 Chrome、Edge 或 Safari 打开。');
- const response=await fetch('report.html.gz',{cache:'no-cache'});
+ const response=await fetch('report.html.gz?build=152e02577df5c800',{cache:'no-cache'});
  if(!response.ok)throw new Error('报告加载失败，请稍后重试。');
  const bytes=await response.arrayBuffer();
  const digest=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),v=>v.toString(16).padStart(2,'0')).join('');
- if(digest!=='bb1150c69030224963abcb5ac5cde08d36d4bb5f7f3551002cf65d8dad06d6b9')throw new Error('报告文件校验未通过，请刷新后重试。');
+ if(digest!=='152e02577df5c8002e73780f5743030ffe7b4bdf6f4ba72648802b712643a89f')throw new Error('报告文件校验未通过，请刷新后重试。');
  const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
  const html=await new Response(stream).text();
  document.open();document.write(html);document.close();
